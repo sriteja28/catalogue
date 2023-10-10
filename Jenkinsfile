@@ -8,19 +8,20 @@ pipeline {
 
     stage('Build') {
       steps {
-        echo 'Build'
+        sh 'npm install'
       }
     }
 
     stage('Unit tests') {
       steps {
         echo 'Unit tests'
+        sh 'npm test'
       }
     }
 
     stage('Code Analysis') {
       steps {
-        echo 'Code Analysis'
+        sh 'sonar-scanner -Dsonar.host.url=http://172.31.81.241:9000 -Dsonar.login=admin -Dsonar.password=admin123 -Dsonar.projectKey=catalogue'
       }
     }
 
